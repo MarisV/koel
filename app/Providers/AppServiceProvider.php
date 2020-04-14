@@ -15,6 +15,10 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
+     *
+     * @param Builder $schema
+     * @param DatabaseManager $db
+     * @param Validator $validator
      */
     public function boot(Builder $schema, DatabaseManager $db, Validator $validator): void
     {

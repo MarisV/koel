@@ -42,6 +42,7 @@ class AuthController extends Controller
      *   "message": "Invalid credentials"
      * }
      *
+     * @param UserLoginRequest $request
      * @return JsonResponse
      */
     public function login(UserLoginRequest $request)

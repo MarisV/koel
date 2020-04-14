@@ -8,6 +8,7 @@ class iTunesService extends AbstractApiClient implements ApiConsumerInterface
 {
     /**
      * Determines whether to use iTunes services.
+     * @return bool
      */
     public function used(): bool
     {
@@ -17,9 +18,10 @@ class iTunesService extends AbstractApiClient implements ApiConsumerInterface
     /**
      * Search for a track on iTunes Store with the given information and get its URL.
      *
-     * @param string $term   The main query string (should be the track's name)
-     * @param string $album  The album's name, if available
+     * @param string $term The main query string (should be the track's name)
+     * @param string $album The album's name, if available
      * @param string $artist The artist's name, if available
+     * @return string|null
      */
     public function getTrackUrl(string $term, string $album = '', string $artist = ''): ?string
     {
@@ -57,16 +59,25 @@ class iTunesService extends AbstractApiClient implements ApiConsumerInterface
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getKey(): ?string
     {
         return null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSecret(): ?string
     {
         return null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEndpoint(): ?string
     {
         return config('koel.itunes.endpoint');

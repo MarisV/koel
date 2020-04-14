@@ -6,8 +6,14 @@ use App\Services\S3Service;
 
 class S3Streamer extends Streamer implements ObjectStorageStreamerInterface
 {
+    /**
+     * @var S3Service
+     */
     private $s3Service;
 
+    /**
+     * @param S3Service $s3Service
+     */
     public function __construct(S3Service $s3Service)
     {
         parent::__construct();

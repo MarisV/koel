@@ -49,6 +49,17 @@ class MediaSyncService
     private $settingRepository;
     private $logger;
 
+    /**
+     * @param MediaMetadataService $mediaMetadataService
+     * @param SongRepository $songRepository
+     * @param ArtistRepository $artistRepository
+     * @param AlbumRepository $albumRepository
+     * @param SettingRepository $settingRepository
+     * @param HelperService $helperService
+     * @param FileSynchronizer $fileSynchronizer
+     * @param Finder $finder
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         MediaMetadataService $mediaMetadataService,
         SongRepository $songRepository,
@@ -81,10 +92,11 @@ class MediaSyncService
     /**
      * Sync the media. Oh sync the media.
      *
-     * @param string[]    $tags        The tags to sync.
+     * @param string|null $mediaPath
+     * @param string[] $tags The tags to sync.
      *                                 Only taken into account for existing records.
      *                                 New records will have all tags synced in regardless.
-     * @param bool        $force       Whether to force syncing even unchanged files
+     * @param bool $force Whether to force syncing even unchanged files
      * @param SyncCommand $syncCommand The SyncMedia command object, to log to console if executed by artisan.
      *
      * @throws Exception
@@ -165,6 +177,7 @@ class MediaSyncService
     /**
      * Sync media using a watch record.
      *
+     * @param WatchRecordInterface $record
      * @throws Exception
      */
     public function syncByWatchRecord(WatchRecordInterface $record): void
@@ -176,6 +189,7 @@ class MediaSyncService
     /**
      * Sync a file's watch record.
      *
+     * @param WatchRecordInterface $record
      * @throws Exception
      */
     private function syncFileRecord(WatchRecordInterface $record): void
@@ -195,6 +209,7 @@ class MediaSyncService
 
     /**
      * Sync a directory's watch record.
+     * @param WatchRecordInterface $record
      */
     private function syncDirectoryRecord(WatchRecordInterface $record): void
     {
@@ -254,6 +269,7 @@ class MediaSyncService
     }
 
     /**
+     * @param string $path
      * @throws Exception
      */
     private function handleDeletedFileRecord(string $path): void

@@ -8,6 +8,9 @@ class ClearMediaCache
 {
     private $mediaCacheService;
 
+    /**
+     * @param MediaCacheService $mediaCacheService
+     */
     public function __construct(MediaCacheService $mediaCacheService)
     {
         $this->mediaCacheService = $mediaCacheService;

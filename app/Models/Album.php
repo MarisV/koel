@@ -53,6 +53,11 @@ class Album extends Model
     /**
      * Get an album using some provided information.
      * If such is not found, a new album will be created using the information.
+     *
+     * @param Artist $artist
+     * @param string $name
+     * @param bool $isCompilation
+     * @return Album
      */
     public static function get(Artist $artist, string $name, bool $isCompilation = false): self
     {
@@ -67,16 +72,26 @@ class Album extends Model
         ]);
     }
 
+    /**
+     * @param string|null $value
+     */
     public function setCoverAttribute(?string $value): void
     {
         $this->attributes['cover'] = $value ?: self::UNKNOWN_COVER;
     }
 
+    /**
+     * @param string|null $value
+     * @return string
+     */
     public function getCoverAttribute(?string $value): string
     {
         return app()->staticUrl('public/img/covers/'.($value ?: self::UNKNOWN_COVER));
     }
 
+    /**
+     * @return bool
+     */
     public function getHasCoverAttribute(): bool
     {
         $cover = array_get($this->attributes, 'cover');
@@ -92,6 +107,9 @@ class Album extends Model
         return file_exists(public_path("/public/img/covers/$cover"));
     }
 
+    /**
+     * @return string|null
+     */
     public function getCoverPathAttribute(): ?string
     {
         $cover = array_get($this->attributes, 'cover');
@@ -103,15 +121,23 @@ class Album extends Model
         return public_path("/public/img/covers/{$this->cover}");
     }
 
+
     /**
+     *
      * Sometimes the tags extracted from getID3 are HTML entity encoded.
      * This makes sure they are always sane.
+     *
+     * @param string $value
+     * @return string
      */
     public function getNameAttribute(string $value): string
     {
         return html_entity_decode($value);
     }
 
+    /**
+     * @return bool
+     */
     public function getIsCompilationAttribute(): bool
     {
         return $this->artist_id === Artist::VARIOUS_ID;

@@ -38,33 +38,49 @@ class Artist extends Model
         return $this->hasMany(Album::class);
     }
 
+
     /**
      * An artist can have many songs.
      * Unless he is Rick Astley.
+     *
+     * @return HasManyThrough
      */
     public function songs(): HasManyThrough
     {
         return $this->hasManyThrough(Song::class, Album::class);
     }
 
+    /**
+     * @return bool
+     */
     public function getIsUnknownAttribute(): bool
     {
         return $this->id === self::UNKNOWN_ID;
     }
 
+    /**
+     * @return bool
+     */
     public function getIsVariousAttribute(): bool
     {
         return $this->id === self::VARIOUS_ID;
     }
 
+    /**
+     * @return static
+     */
     public static function getVariousArtist(): self
     {
         return static::find(self::VARIOUS_ID);
     }
 
+
     /**
      * Sometimes the tags extracted from getID3 are HTML entity encoded.
      * This makes sure they are always sane.
+     *
+     * @param string $value
+     * @return string
      */
     public function getNameAttribute(string $value): string
     {
@@ -74,6 +90,9 @@ class Artist extends Model
     /**
      * Get an Artist object from their name.
      * If such is not found, a new artist will be created.
+     *
+     * @param string $name
+     * @return static
      */
     public static function get(string $name): self
     {
@@ -89,12 +108,18 @@ class Artist extends Model
 
     /**
      * Turn the image name into its absolute URL.
+     *
+     * @param string|null $value
+     * @return string|null
      */
     public function getImageAttribute(?string $value): ?string
     {
         return $value ? app()->staticUrl("public/img/artists/$value") : null;
     }
 
+    /**
+     * @return bool
+     */
     public function getHasImageAttribute(): bool
     {
         $image = array_get($this->attributes, 'image');

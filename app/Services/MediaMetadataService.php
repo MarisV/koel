@@ -9,8 +9,14 @@ use Psr\Log\LoggerInterface;
 
 class MediaMetadataService
 {
+    /**
+     * @var LoggerInterface
+     */
     private $logger;
 
+    /**
+     * @param LoggerInterface $logger
+     */
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -18,6 +24,9 @@ class MediaMetadataService
 
     /**
      * Download a copy of the album cover.
+     *
+     * @param Album $album
+     * @param string $imageUrl
      */
     public function downloadAlbumCover(Album $album, string $imageUrl): void
     {
@@ -28,7 +37,8 @@ class MediaMetadataService
     /**
      * Copy a cover file from an existing image on the system.
      *
-     * @param string $source      The original image's full path.
+     * @param Album $album
+     * @param string $source The original image's full path.
      * @param string $destination The destination path. Automatically generated if empty.
      */
     public function copyAlbumCover(Album $album, string $source, string $destination = ''): void
@@ -43,6 +53,9 @@ class MediaMetadataService
     /**
      * Write an album cover image file with binary data and update the Album with the new cover attribute.
      *
+     * @param Album $album
+     * @param string $binaryData
+     * @param string $extension
      * @param string $destination The destination path. Automatically generated if empty.
      */
     public function writeAlbumCover(Album $album, string $binaryData, string $extension, string $destination = ''): void
@@ -60,6 +73,9 @@ class MediaMetadataService
 
     /**
      * Download a copy of the artist image.
+     *
+     * @param Artist $artist
+     * @param string $imageUrl
      */
     public function downloadArtistImage(Artist $artist, string $imageUrl): void
     {
@@ -70,6 +86,9 @@ class MediaMetadataService
     /**
      * Write an artist image file with binary data and update the Artist with the new image attribute.
      *
+     * @param Artist $artist
+     * @param string $binaryData
+     * @param string $extension
      * @param string $destination The destination path. Automatically generated if empty.
      */
     public function writeArtistImage(
@@ -92,7 +111,9 @@ class MediaMetadataService
     /**
      * Generate the absolute path for an album cover image.
      *
+     * @param Album $album
      * @param string $extension The extension of the cover (without dot)
+     * @return string
      */
     private function generateAlbumCoverPath(Album $album, string $extension): string
     {
@@ -102,7 +123,9 @@ class MediaMetadataService
     /**
      * Generate the absolute path for an artist image.
      *
+     * @param Artist $artist
      * @param string $extension The extension of the cover (without dot)
+     * @return string
      */
     private function generateArtistImagePath(Artist $artist, $extension): string
     {

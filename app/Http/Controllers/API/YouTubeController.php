@@ -27,6 +27,8 @@ class YouTubeController extends Controller
      * @bodyParam pageToken string The [`nextPageToken`](https://developers.google.com/youtube/v3/guides/implementation/pagination), if applicable.
      * @responseFile responses/youTube.searchVideosRelatedToSong.json
      *
+     * @param YouTubeSearchRequest $request
+     * @param Song $song
      * @return JsonResponse
      */
     public function searchVideosRelatedToSong(YouTubeSearchRequest $request, Song $song)

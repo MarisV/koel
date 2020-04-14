@@ -15,6 +15,9 @@ class Util
 
     /**
      * Detects higher UTF encoded strings.
+     *
+     * @param string $str
+     * @return string|null
      */
     public function detectUTFEncoding(string $str): ?string
     {

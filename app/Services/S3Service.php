@@ -8,15 +8,30 @@ use Illuminate\Cache\Repository as Cache;
 
 class S3Service implements ObjectStorageInterface
 {
+    /**
+     * @var S3ClientInterface|null
+     */
     private $s3Client;
+
+    /**
+     * @var Cache
+     */
     private $cache;
 
+    /**
+     * @param S3ClientInterface|null $s3Client
+     * @param Cache $cache
+     */
     public function __construct(?S3ClientInterface $s3Client, Cache $cache)
     {
         $this->s3Client = $s3Client;
         $this->cache = $cache;
     }
 
+    /**
+     * @param Song $song
+     * @return string
+     */
     public function getSongPublicUrl(Song $song): string
     {
         return $this->cache->remember("OSUrl/{$song->id}", 60, function () use ($song): string {
@@ -28,9 +43,7 @@ class S3Service implements ObjectStorageInterface
             // Here we specify that the request is valid for 1 hour.
             // We'll also cache the public URL for future reuse.
             $request = $this->s3Client->createPresignedRequest($cmd, '+1 hour');
-            $url = (string) $request->getUri();
-
-            return $url;
+            return (string) $request->getUri();
         });
     }
 }

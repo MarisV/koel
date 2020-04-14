@@ -45,6 +45,7 @@ class PlaylistController extends Controller
      * @bodyParam rules array An array of rules if creating a "smart playlist."
      * @responseFile responses/playlist.store.json
      *
+     * @param PlaylistStoreRequest $request
      * @return JsonResponse
      */
     public function store(PlaylistStoreRequest $request)

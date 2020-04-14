@@ -37,17 +37,24 @@ class User extends Authenticatable
     ];
     protected $hidden = ['password', 'remember_token', 'created_at', 'updated_at'];
 
+    /**
+     * @return HasMany
+     */
     public function playlists(): HasMany
     {
         return $this->hasMany(Playlist::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function interactions(): HasMany
     {
         return $this->hasMany(Interaction::class);
     }
 
     /**
+     * @param string $key
      * @return mixed|null
      */
     public function getPreference(string $key)
@@ -58,6 +65,7 @@ class User extends Authenticatable
     }
 
     /**
+     * @param string $key
      * @param mixed $val
      */
     public function savePreference(string $key, $val): void
@@ -72,6 +80,7 @@ class User extends Authenticatable
     /**
      * An alias to savePreference().
      *
+     * @param string $key
      * @param mixed $val
      *
      * @see self::savePreference
@@ -81,6 +90,9 @@ class User extends Authenticatable
         $this->savePreference($key, $val);
     }
 
+    /**
+     * @param string $key
+     */
     public function deletePreference(string $key): void
     {
         $preferences = $this->preferences;
@@ -120,6 +132,7 @@ class User extends Authenticatable
     /**
      * Unserialize the user preferences back to an array before returning.
      *
+     * @param string|null $value
      * @return mixed[]
      */
     public function getPreferencesAttribute(?string $value): array

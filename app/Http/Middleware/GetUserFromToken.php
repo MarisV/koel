@@ -9,6 +9,8 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 class GetUserFromToken extends BaseMiddleware
 {
     /**
+     * @param Request $request
+     * @param Closure $next
      * @return mixed
      */
     public function handle(Request $request, Closure $next)

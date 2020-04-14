@@ -22,6 +22,7 @@ class PlayCountController extends Controller
      *
      * @responseFile responses/interaction.json
      *
+     * @param StorePlayCountRequest $request
      * @return JsonResponse
      */
     public function store(StorePlayCountRequest $request)

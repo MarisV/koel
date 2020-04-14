@@ -17,6 +17,7 @@ class AlbumController extends Controller
      *
      * @responseFile responses/mediaInformation.album.show.json
      *
+     * @param Album $album
      * @return JsonResponse
      */
     public function show(Album $album)

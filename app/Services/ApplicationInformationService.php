@@ -16,6 +16,11 @@ class ApplicationInformationService
     private $cache;
     private $logger;
 
+    /**
+     * @param Client $client
+     * @param Cache $cache
+     * @param Logger $logger
+     */
     public function __construct(Client $client, Cache $cache, Logger $logger)
     {
         $this->client = $client;

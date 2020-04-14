@@ -36,8 +36,7 @@ class UserController extends Controller
      *   "email": "john@doe.com"
      * }
      *
-     * @throws RuntimeException
-     *
+     * @param UserStoreRequest $request
      * @return JsonResponse
      */
     public function store(UserStoreRequest $request)
@@ -58,8 +57,8 @@ class UserController extends Controller
      *
      * @response []
      *
-     * @throws RuntimeException
-     *
+     * @param UserUpdateRequest $request
+     * @param User $user
      * @return JsonResponse
      */
     public function update(UserUpdateRequest $request, User $user)
@@ -80,9 +79,9 @@ class UserController extends Controller
      *
      * @response []
      *
-     * @throws Exception
+     * @param User $user
      * @throws AuthorizationException
-     *
+     * @throws Exception
      * @return JsonResponse
      */
     public function destroy(User $user)

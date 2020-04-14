@@ -9,8 +9,14 @@ use App\Models\Artist;
 
 class MediaInformationService
 {
+    /**
+     * @var LastfmService
+     */
     private $lastfmService;
 
+    /**
+     * @param LastfmService $lastfmService
+     */
     public function __construct(LastfmService $lastfmService)
     {
         $this->lastfmService = $lastfmService;
@@ -19,6 +25,7 @@ class MediaInformationService
     /**
      * Get extra information about an album from Last.fm.
      *
+     * @param Album $album
      * @return array|null The album info in an array format, or null on failure.
      */
     public function getAlbumInformation(Album $album): ?array
@@ -43,6 +50,7 @@ class MediaInformationService
     /**
      * Get extra information about an artist from Last.fm.
      *
+     * @param Artist $artist
      * @return array|null The artist info in an array format, or null on failure.
      */
     public function getArtistInformation(Artist $artist): ?array

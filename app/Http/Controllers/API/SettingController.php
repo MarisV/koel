@@ -29,9 +29,9 @@ class SettingController extends Controller
      *
      * @response []
      *
-     * @throws Exception
-     *
+     * @param SettingRequest $request
      * @return JsonResponse
+     * @throws Exception
      */
     public function store(SettingRequest $request)
     {

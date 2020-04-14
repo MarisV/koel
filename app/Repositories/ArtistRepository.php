@@ -7,6 +7,9 @@ use App\Models\Song;
 
 class ArtistRepository extends AbstractRepository
 {
+    /**
+     * @inheritDoc
+     */
     public function getModelClass(): string
     {
         return Artist::class;

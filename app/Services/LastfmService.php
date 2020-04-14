@@ -22,6 +22,7 @@ class LastfmService extends AbstractApiClient implements ApiConsumerInterface
 
     /**
      * Determine if our application is using Last.fm.
+     * @return bool
      */
     public function used(): bool
     {
@@ -30,6 +31,7 @@ class LastfmService extends AbstractApiClient implements ApiConsumerInterface
 
     /**
      * Determine if Last.fm integration is enabled.
+     * @return bool
      */
     public function enabled(): bool
     {
@@ -97,6 +99,8 @@ class LastfmService extends AbstractApiClient implements ApiConsumerInterface
     /**
      * Get information about an album.
      *
+     * @param string $albumName
+     * @param string $artistName
      * @return mixed[]|null
      */
     public function getAlbumInformation(string $albumName, string $artistName): ?array
@@ -165,6 +169,7 @@ class LastfmService extends AbstractApiClient implements ApiConsumerInterface
      *
      * @param string $token The token after successfully connecting to Last.fm
      *
+     * @return string|null
      * @link http://www.last.fm/api/webauth#4
      */
     public function getSessionKey(string $token): ?string
@@ -299,6 +304,7 @@ class LastfmService extends AbstractApiClient implements ApiConsumerInterface
      * Correctly format a value returned by Last.fm.
      *
      * @param string|array $value
+     * @return string
      */
     protected function formatText($value): string
     {
@@ -309,16 +315,25 @@ class LastfmService extends AbstractApiClient implements ApiConsumerInterface
         return trim(str_replace('Read more on Last.fm', '', nl2br(strip_tags(html_entity_decode($value)))));
     }
 
+    /**
+     * @return string|null
+     */
     public function getKey(): ?string
     {
         return config('koel.lastfm.key');
     }
 
+    /**
+     * @return string|null
+     */
     public function getEndpoint(): ?string
     {
         return config('koel.lastfm.endpoint');
     }
 
+    /**
+     * @return string|null
+     */
     public function getSecret(): ?string
     {
         return config('koel.lastfm.secret');

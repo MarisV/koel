@@ -33,6 +33,11 @@ abstract class AbstractApiClient
      */
     protected $keyParam = 'key';
 
+    /**
+     * @param Client $client
+     * @param Cache $cache
+     * @param Logger $logger
+     */
     public function __construct(Client $client, Cache $cache, Logger $logger)
     {
         $this->client = $client;
@@ -99,7 +104,9 @@ abstract class AbstractApiClient
     /**
      * Turn a URI segment into a full API URL.
      *
+     * @param string $uri
      * @param bool $appendKey Whether to automatically append the API key into the URL.
+     * @return string
      */
     public function buildUrl(string $uri, bool $appendKey = true): string
     {
@@ -122,14 +129,26 @@ abstract class AbstractApiClient
         return $uri;
     }
 
+    /**
+     * @return Client
+     */
     public function getClient(): Client
     {
         return $this->client;
     }
 
+    /**
+     * @return string|null
+     */
     abstract public function getKey(): ?string;
 
+    /**
+     * @return string|null
+     */
     abstract public function getSecret(): ?string;
 
+    /**
+     * @return string|null
+     */
     abstract public function getEndpoint(): ?string;
 }

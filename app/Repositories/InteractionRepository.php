@@ -12,6 +12,9 @@ class InteractionRepository extends AbstractRepository
 {
     use ByCurrentUser;
 
+    /**
+     * @inheritDoc
+     */
     public function getModelClass(): string
     {
         return Interaction::class;
@@ -19,6 +22,9 @@ class InteractionRepository extends AbstractRepository
 
     /**
      * Get all songs favorited by a user.
+     *
+     * @param User $user
+     * @return Collection
      */
     public function getUserFavorites(User $user): Collection
     {
@@ -32,6 +38,8 @@ class InteractionRepository extends AbstractRepository
     }
 
     /**
+     * @param User $user
+     * @param int|null $count
      * @return Interaction[]
      */
     public function getRecentlyPlayed(User $user, ?int $count = null): array

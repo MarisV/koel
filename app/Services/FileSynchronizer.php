@@ -62,6 +62,14 @@ class FileSynchronizer
      */
     private $syncError;
 
+    /**
+     * @param getID3 $getID3
+     * @param MediaMetadataService $mediaMetadataService
+     * @param HelperService $helperService
+     * @param SongRepository $songRepository
+     * @param Cache $cache
+     * @param Finder $finder
+     */
     public function __construct(
         getID3 $getID3,
         MediaMetadataService $mediaMetadataService,
@@ -80,6 +88,7 @@ class FileSynchronizer
 
     /**
      * @param string|SplFileInfo $path
+     * @return FileSynchronizer
      */
     public function setFile($path): self
     {
@@ -103,6 +112,7 @@ class FileSynchronizer
 
     /**
      * Get all applicable info from the file.
+     * @return array
      */
     public function getFileInfo(): array
     {
@@ -147,8 +157,9 @@ class FileSynchronizer
     /**
      * Sync the song with all available media info against the database.
      *
-     * @param string[] $tags  The (selective) tags to sync (if the song exists)
-     * @param bool     $force Whether to force syncing, even if the file is unchanged
+     * @param string[] $tags The (selective) tags to sync (if the song exists)
+     * @param bool $force Whether to force syncing, even if the file is unchanged
+     * @return int
      */
     public function sync(array $tags, bool $force = false): int
     {
@@ -218,6 +229,7 @@ class FileSynchronizer
     /**
      * Try to generate a cover for an album based on extracted data, or use the cover file under the directory.
      *
+     * @param Album $album
      * @param mixed[]|null $coverData
      */
     private function generateAlbumCover(Album $album, ?array $coverData): void
@@ -267,6 +279,10 @@ class FileSynchronizer
         });
     }
 
+    /**
+     * @param string $path
+     * @return bool
+     */
     private function isImage(string $path): bool
     {
         try {
@@ -278,6 +294,8 @@ class FileSynchronizer
 
     /**
      * Determine if the file is new (its Song record can't be found in the database).
+     *
+     * @return bool
      */
     public function isFileNew(): bool
     {
@@ -286,22 +304,34 @@ class FileSynchronizer
 
     /**
      * Determine if the file is changed (its Song record is found, but the timestamp is different).
+     *
+     * @return bool
      */
     public function isFileChanged(): bool
     {
         return !$this->isFileNew() && $this->song->mtime !== $this->fileModifiedTime;
     }
 
+    /**
+     * @return bool
+     */
     public function isFileNewOrChanged(): bool
     {
         return $this->isFileNew() || $this->isFileChanged();
     }
 
+    /**
+     * @return string|null
+     */
     public function getSyncError(): ?string
     {
         return $this->syncError;
     }
 
+    /**
+     * @param array $info
+     * @return int
+     */
     private function getTrackNumberFromInfo(array $info): int
     {
         $track = 0;
@@ -320,6 +350,11 @@ class FileSynchronizer
         return $track;
     }
 
+    /**
+     * @param array $info
+     * @param array $comments
+     * @param array $props
+     */
     private function gatherPropsFromTags(array $info, array $comments, array &$props): void
     {
         $propertyMap = [
@@ -347,6 +382,10 @@ class FileSynchronizer
         }
     }
 
+    /**
+     * @param array $props
+     * @return bool
+     */
     private function isCompilation(array $props): bool
     {
         // A "compilation" property can be determined by:

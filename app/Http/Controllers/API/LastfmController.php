@@ -6,8 +6,11 @@ use App\Http\Requests\API\LastfmCallbackRequest;
 use App\Http\Requests\API\LastfmSetSessionKeyRequest;
 use App\Services\LastfmService;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\JWTAuth;
 
@@ -59,6 +62,8 @@ class LastfmController extends Controller
 
     /**
      * Serve the callback request from Last.fm.
+     * @param LastfmCallbackRequest $request
+     * @return Application|Factory|View
      */
     public function callback(LastfmCallbackRequest $request)
     {

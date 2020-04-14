@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Download;
 use App\Http\Requests\API\Download\Request;
 use App\Repositories\InteractionRepository;
 use App\Services\DownloadService;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * @group 6. Download
@@ -23,6 +24,8 @@ class FavoritesController extends Controller
      * Download all songs favorite'd by the current user
      *
      * @response []
+     * @param Request $request
+     * @return BinaryFileResponse
      */
     public function show(Request $request)
     {

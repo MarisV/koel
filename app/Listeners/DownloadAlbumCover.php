@@ -9,11 +9,17 @@ class DownloadAlbumCover
 {
     private $mediaMetadataService;
 
+    /**
+     * @param MediaMetadataService $mediaMetadataService
+     */
     public function __construct(MediaMetadataService $mediaMetadataService)
     {
         $this->mediaMetadataService = $mediaMetadataService;
     }
 
+    /**
+     * @param AlbumInformationFetched $event
+     */
     public function handle(AlbumInformationFetched $event): void
     {
         $info = $event->getInformation();

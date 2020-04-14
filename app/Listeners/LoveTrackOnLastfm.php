@@ -9,11 +9,17 @@ class LoveTrackOnLastfm
 {
     private $lastfm;
 
+    /**
+     * @param LastfmService $lastfm
+     */
     public function __construct(LastfmService $lastfm)
     {
         $this->lastfm = $lastfm;
     }
 
+    /**
+     * @param SongLikeToggled $event
+     */
     public function handle(SongLikeToggled $event): void
     {
         if (!$this->lastfm->enabled() ||

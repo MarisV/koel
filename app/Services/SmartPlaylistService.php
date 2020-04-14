@@ -15,13 +15,23 @@ class SmartPlaylistService
 {
     private const RULE_REQUIRES_USER_PREFIXES = ['interactions.'];
 
+    /**
+     * @var SongRepository
+     */
     private $songRepository;
 
+    /**
+     * @param SongRepository $songRepository
+     */
     public function __construct(SongRepository $songRepository)
     {
         $this->songRepository = $songRepository;
     }
 
+    /**
+     * @param Playlist $playlist
+     * @return Collection
+     */
     public function getSongs(Playlist $playlist): Collection
     {
         if (!$playlist->is_smart) {
@@ -33,6 +43,10 @@ class SmartPlaylistService
         return $this->buildQueryFromRules($rules)->get();
     }
 
+    /**
+     * @param array $rules
+     * @return Builder
+     */
     public function buildQueryFromRules(array $rules): Builder
     {
         $query = Song::query();
@@ -54,6 +68,8 @@ class SmartPlaylistService
      * For those, we create an additional "user_id" rule.
      *
      * @param array[] $rules
+     * @param User $user
+     * @return array
      */
     public function addRequiresUserRules(array $rules, User $user): array
     {
@@ -75,6 +91,11 @@ class SmartPlaylistService
         return $rules;
     }
 
+    /**
+     * @param User $user
+     * @param string $modelPrefix
+     * @return array
+     */
     private function createRequireUserRule(User $user, string $modelPrefix): array
     {
         return [

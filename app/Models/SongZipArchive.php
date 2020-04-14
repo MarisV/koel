@@ -31,6 +31,9 @@ class SongZipArchive
      */
     private $fileNames = [];
 
+    /**
+     * @param string $path
+     */
     public function __construct(string $path = '')
     {
         $this->path = $path ?: self::generateRandomArchivePath();
@@ -44,6 +47,9 @@ class SongZipArchive
 
     /**
      * Add multiple songs into the archive.
+     *
+     * @param Collection $songs
+     * @return SongZipArchive
      */
     public function addSongs(Collection $songs): self
     {
@@ -54,6 +60,9 @@ class SongZipArchive
 
     /**
      * Add a single song into the archive.
+     *
+     * @param Song $song
+     * @return SongZipArchive
      */
     public function addSong(Song $song): self
     {
@@ -86,6 +95,9 @@ class SongZipArchive
      * We add all files into the zip archive as a flat structure.
      * As a result, there can be duplicate file names.
      * This method makes sure each file name is unique in the zip archive.
+     *
+     * @param string $path
+     * @return string
      */
     private function generateZipContentFileNameFromPath(string $path): string
     {
@@ -104,6 +116,9 @@ class SongZipArchive
         return $name;
     }
 
+    /**
+     * @return string
+     */
     private static function generateRandomArchivePath(): string
     {
         // We use system's temp dir instead of storage_path() here, so that the generated files
@@ -111,6 +126,9 @@ class SongZipArchive
         return sprintf('%s%skoel-download-%s.zip', sys_get_temp_dir(), DIRECTORY_SEPARATOR, uniqid());
     }
 
+    /**
+     * @return ZipArchive
+     */
     public function getArchive(): ZipArchive
     {
         return $this->archive;

@@ -19,6 +19,7 @@ class LikeController extends Controller
      *
      * @responseFile responses/interaction.json
      *
+     * @param SongLikeRequest $request
      * @return JsonResponse
      */
     public function store(SongLikeRequest $request)

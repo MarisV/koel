@@ -9,11 +9,17 @@ class DownloadArtistImage
 {
     private $mediaMetadataService;
 
+    /**
+     * @param MediaMetadataService $mediaMetadataService
+     */
     public function __construct(MediaMetadataService $mediaMetadataService)
     {
         $this->mediaMetadataService = $mediaMetadataService;
     }
 
+    /**
+     * @param ArtistInformationFetched $event
+     */
     public function handle(ArtistInformationFetched $event): void
     {
         $info = $event->getInformation();

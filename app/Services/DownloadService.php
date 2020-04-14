@@ -12,8 +12,14 @@ use InvalidArgumentException;
 
 class DownloadService
 {
+    /**
+     * @var S3Service
+     */
     private $s3Service;
 
+    /**
+     * @param S3Service $s3Service
+     */
     public function __construct(S3Service $s3Service)
     {
         $this->s3Service = $s3Service;
@@ -46,6 +52,10 @@ class DownloadService
         throw new InvalidArgumentException('Unsupported download type.');
     }
 
+    /**
+     * @param Song $song
+     * @return string
+     */
     public function fromSong(Song $song): string
     {
         if ($s3Params = $song->s3_params) {
@@ -68,6 +78,10 @@ class DownloadService
         return $localPath;
     }
 
+    /**
+     * @param Collection $songs
+     * @return string
+     */
     protected function fromMultipleSongs(Collection $songs): string
     {
         if ($songs->count() === 1) {
@@ -80,16 +94,28 @@ class DownloadService
             ->getPath();
     }
 
+    /**
+     * @param Playlist $playlist
+     * @return string
+     */
     protected function fromPlaylist(Playlist $playlist): string
     {
         return $this->fromMultipleSongs($playlist->songs);
     }
 
+    /**
+     * @param Album $album
+     * @return string
+     */
     protected function fromAlbum(Album $album): string
     {
         return $this->fromMultipleSongs($album->songs);
     }
 
+    /**
+     * @param Artist $artist
+     * @return string
+     */
     protected function fromArtist(Artist $artist): string
     {
         return $this->fromMultipleSongs($artist->songs);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Interaction;
 
 use App\Http\Requests\API\BatchInteractionRequest;
+use Illuminate\Http\JsonResponse;
 
 /**
  * @group 3. Song interactions
@@ -17,6 +18,8 @@ class BatchLikeController extends Controller
      *
      * @bodyParam songs array required An array of song IDs.
      * @responseFile responses/interactions.json
+     * @param BatchInteractionRequest $request
+     * @return JsonResponse
      */
     public function store(BatchInteractionRequest $request)
     {
@@ -33,6 +36,8 @@ class BatchLikeController extends Controller
      *
      * @bodyParam songs array required An array of song IDs.
      * @responseFile responses/interactions.json
+     * @param BatchInteractionRequest $request
+     * @return JsonResponse
      */
     public function destroy(BatchInteractionRequest $request)
     {

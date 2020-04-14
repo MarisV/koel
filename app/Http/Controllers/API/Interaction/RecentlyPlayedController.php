@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\Interaction;
 
 use App\Repositories\InteractionRepository;
 use App\Services\InteractionService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
@@ -26,6 +27,9 @@ class RecentlyPlayedController extends Controller
      *
      * @queryParam count The maximum number of songs to be returned. Example: 2
      * @response ["0146d01afb742b01f28ab8b556f9a75d", "c741133cb8d1982a5c60b1ce2a1e6e47"]
+     * @param Request $request
+     * @param int|null $count
+     * @return JsonResponse
      */
     public function index(Request $request, ?int $count = null)
     {

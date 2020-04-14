@@ -64,21 +64,33 @@ class Song extends Model
      */
     public $incrementing = false;
 
+    /**
+     * @return BelongsTo
+     */
     public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function album(): BelongsTo
     {
         return $this->belongsTo(Album::class);
     }
 
+    /**
+     * @return BelongsToMany
+     */
     public function playlists(): BelongsToMany
     {
         return $this->belongsToMany(Playlist::class);
     }
 
+    /**
+     * @return HasMany
+     */
     public function interactions(): HasMany
     {
         return $this->hasMany(Interaction::class);
@@ -95,6 +107,7 @@ class Song extends Model
      *                       - lyrics
      *                       All of these are optional, in which case the info will not be changed
      *                       (except for lyrics, which will be emptied).
+     * @return Collection
      */
     public static function updateInfo(array $ids, array $data): Collection
     {
@@ -135,6 +148,15 @@ class Song extends Model
         return $updatedSongs;
     }
 
+    /**
+     * @param string $title
+     * @param string $albumName
+     * @param string $artistName
+     * @param string $lyrics
+     * @param int $track
+     * @param int $compilationState
+     * @return $this
+     */
     public function updateSingle(
         string $title,
         string $albumName,
@@ -185,6 +207,10 @@ class Song extends Model
 
     /**
      * Scope a query to only include songs in a given directory.
+     *
+     * @param Builder $query
+     * @param string $path
+     * @return Builder
      */
     public function scopeInDirectory(Builder $query, string $path): Builder
     {
@@ -197,6 +223,8 @@ class Song extends Model
     /**
      * Sometimes the tags extracted from getID3 are HTML entity encoded.
      * This makes sure they are always sane.
+     *
+     * @param string $value
      */
     public function setTitleAttribute(string $value): void
     {
@@ -206,6 +234,9 @@ class Song extends Model
     /**
      * Some songs don't have a title.
      * Fall back to the file name (without extension) for such.
+     *
+     * @param string|null $value
+     * @return string
      */
     public function getTitleAttribute(?string $value): string
     {
@@ -214,6 +245,9 @@ class Song extends Model
 
     /**
      * Prepare the lyrics for displaying.
+     *
+     * @param string $value
+     * @return string
      */
     public function getLyricsAttribute(string $value): string
     {

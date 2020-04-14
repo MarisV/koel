@@ -47,9 +47,11 @@ class SongController extends Controller
      *
      * @link https://github.com/phanan/koel/wiki#streaming-music
      *
+     * @param SongPlayRequest $request
+     * @param Song $song
      * @param null|bool $transcode Whether to force transcoding the song.
      *                             If this is omitted, by default Koel will transcode FLAC.
-     * @param null|int  $bitRate   The target bit rate to transcode, defaults to OUTPUT_BIT_RATE.
+     * @param null|int $bitRate The target bit rate to transcode, defaults to OUTPUT_BIT_RATE.
      *                             Only taken into account if $transcode is truthy.
      *
      * @return RedirectResponse|Redirector
@@ -69,6 +71,7 @@ class SongController extends Controller
      *
      * @group 5. Media information
      *
+     * @param SongUpdateRequest $request
      * @return JsonResponse
      */
     public function update(SongUpdateRequest $request)

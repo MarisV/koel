@@ -64,6 +64,7 @@ class DataController extends Controller
      *
      * @responseFile responses/data.index.json
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function index(Request $request)

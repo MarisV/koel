@@ -15,6 +15,9 @@ abstract class AbstractRepository implements RepositoryInterface
     /** @var Guard */
     protected $auth;
 
+    /**
+     * @return string
+     */
     abstract public function getModelClass(): string;
 
     public function __construct()

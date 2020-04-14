@@ -9,6 +9,8 @@ class YouTubeService extends AbstractApiClient implements ApiConsumerInterface
 {
     /**
      * Determine if our application is using YouTube.
+     *
+     * @return bool
      */
     public function enabled(): bool
     {
@@ -18,6 +20,8 @@ class YouTubeService extends AbstractApiClient implements ApiConsumerInterface
     /**
      * Search for YouTube videos related to a song.
      *
+     * @param Song $song
+     * @param string $pageToken
      * @return mixed|null
      */
     public function searchVideosRelatedToSong(Song $song, string $pageToken = '')
@@ -65,16 +69,25 @@ class YouTubeService extends AbstractApiClient implements ApiConsumerInterface
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getEndpoint(): ?string
     {
         return config('koel.youtube.endpoint');
     }
 
+    /**
+     * @return string|null
+     */
     public function getKey(): ?string
     {
         return config('koel.youtube.key');
     }
 
+    /**
+     * @return string|null
+     */
     public function getSecret(): ?string
     {
         return null;

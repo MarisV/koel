@@ -17,6 +17,7 @@ class ArtistController extends Controller
      *
      * @responseFile responses/mediaInformation.artist.show.json
      *
+     * @param Artist $artist
      * @return JsonResponse
      */
     public function show(Artist $artist)

@@ -8,8 +8,14 @@ use App\Models\User;
 
 class InteractionService
 {
+    /**
+     * @var Interaction
+     */
     private $interaction;
 
+    /**
+     * @param Interaction $interaction
+     */
     public function __construct(Interaction $interaction)
     {
         $this->interaction = $interaction;
@@ -18,6 +24,8 @@ class InteractionService
     /**
      * Increase the number of times a song is played by a user.
      *
+     * @param string $songId
+     * @param User $user
      * @return Interaction The affected Interaction object
      */
     public function increasePlayCount(string $songId, User $user): Interaction
@@ -38,6 +46,8 @@ class InteractionService
     /**
      * Like or unlike a song on behalf of a user.
      *
+     * @param string $songId
+     * @param User $user
      * @return Interaction The affected Interaction object.
      */
     public function toggleLike(string $songId, User $user): Interaction
@@ -58,6 +68,7 @@ class InteractionService
      *
      * @param string[] $songIds
      *
+     * @param User $user
      * @return Interaction[] The array of Interaction objects.
      */
     public function batchLike(array $songIds, User $user): array
@@ -83,6 +94,7 @@ class InteractionService
      * Unlike several songs at once.
      *
      * @param string[] $songIds
+     * @param User $user
      */
     public function batchUnlike(array $songIds, User $user): void
     {

@@ -10,11 +10,17 @@ class UpdateLastfmNowPlaying
 {
     private $lastfm;
 
+    /**
+     * @param LastfmService $lastfm
+     */
     public function __construct(LastfmService $lastfm)
     {
         $this->lastfm = $lastfm;
     }
 
+    /**
+     * @param SongStartedPlaying $event
+     */
     public function handle(SongStartedPlaying $event): void
     {
         if (!$this->lastfm->enabled() ||

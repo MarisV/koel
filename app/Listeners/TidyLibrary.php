@@ -9,6 +9,9 @@ class TidyLibrary
 {
     private $mediaSyncService;
 
+    /**
+     * @param MediaSyncService $mediaSyncService
+     */
     public function __construct(MediaSyncService $mediaSyncService)
     {
         $this->mediaSyncService = $mediaSyncService;

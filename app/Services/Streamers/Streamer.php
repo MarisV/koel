@@ -22,6 +22,9 @@ class Streamer
         @error_reporting(0);
     }
 
+    /**
+     * @param Song $song
+     */
     public function setSong(Song $song): void
     {
         $this->song = $song;

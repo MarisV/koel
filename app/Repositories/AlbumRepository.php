@@ -7,19 +7,23 @@ use App\Models\Song;
 
 class AlbumRepository extends AbstractRepository
 {
+    /**
+     * @inheritDoc
+     */
     public function getModelClass(): string
     {
         return Album::class;
     }
 
+    /**
+     * @return array
+     */
     public function getNonEmptyAlbumIds(): array
     {
-        $ids = Song::select('album_id')
+        return Song::select('album_id')
             ->groupBy('album_id')
             ->get()
             ->pluck('album_id')
             ->toArray();
-
-        return $ids;
     }
 }

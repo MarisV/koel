@@ -29,6 +29,7 @@ class ProfileController extends Controller
      *   "email": "john@doe.com"
      * }
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function show(Request $request)
@@ -45,8 +46,7 @@ class ProfileController extends Controller
      *
      * @response []
      *
-     * @throws RuntimeException
-     *
+     * @param ProfileUpdateRequest $request
      * @return JsonResponse
      */
     public function update(ProfileUpdateRequest $request)

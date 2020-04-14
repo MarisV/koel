@@ -47,11 +47,17 @@ class TranscodingStreamer extends Streamer implements TranscodingStreamerInterfa
         passthru("$ffmpeg ".implode(' ', $args));
     }
 
+    /**
+     * @param int $bitRate
+     */
     public function setBitRate(int $bitRate): void
     {
         $this->bitRate = $bitRate;
     }
 
+    /**
+     * @param float $startTime
+     */
     public function setStartTime(float $startTime): void
     {
         $this->startTime = $startTime;

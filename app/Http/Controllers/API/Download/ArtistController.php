@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Download;
 
 use App\Models\Artist;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * @group 6. Download
@@ -16,6 +17,8 @@ class ArtistController extends Controller
      * Let's pray to God the user doesn't trigger this on Elvis.
      *
      * @response []
+     * @param Artist $artist
+     * @return BinaryFileResponse
      */
     public function show(Artist $artist)
     {

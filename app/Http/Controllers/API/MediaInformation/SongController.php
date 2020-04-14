@@ -29,6 +29,7 @@ class SongController extends Controller
      *
      * @responseFile responses/mediaInformation.song.show.json
      *
+     * @param Song $song
      * @return JsonResponse
      */
     public function show(Song $song)

@@ -29,16 +29,25 @@ class Playlist extends Model
     ];
     protected $appends = ['is_smart'];
 
+    /**
+     * @return BelongsToMany
+     */
     public function songs(): BelongsToMany
     {
         return $this->belongsToMany(Song::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return bool
+     */
     public function getIsSmartAttribute(): bool
     {
         return (bool) $this->rules;

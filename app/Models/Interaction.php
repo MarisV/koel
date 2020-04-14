@@ -26,11 +26,17 @@ class Interaction extends Model
     protected $guarded = ['id'];
     protected $hidden = ['id', 'user_id', 'created_at', 'updated_at'];
 
+    /**
+     * @return BelongsTo
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
     public function song(): BelongsTo
     {
         return $this->belongsTo(Song::class);
